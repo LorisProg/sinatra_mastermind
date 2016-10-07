@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mastermind</title>
+	</head>
+	<body>
+		<h2>Mastermind</h2>
+		<h4>Are you ready to challenge the game ?</h4>
+		<p>Instructions : The computer selects a combination of 4-digits between 1 and 6.<br>
+		After each of your guess a feedback will tell you how close you are.<br>
+		Let's Play !</p>
+		<h4>Your guess ?</h4>
+		<form>
+			<input type="text" name="guess">
+			<input type="submit" name="submit">
+		</form>
+
+		<% if guess %>
+		<p>Debug :<br>
+		@@code = <%= @@code %><br>
+		@@guess_left = <%= @@guess_left %><br>
+		win? = <%= win? %><br>
+		lose? = <%= lose? %><br></p>
+			<% if valid_code?(guess) === false %>
+				<p class="alert">The code must be 4 digit between 1 anf 6. Please enter a valid combination.</p>
+			<% end %>
+			<% if win? %>
+				<p>Congratulations you won ! The code was : <%= @@code %></p>
+			<% elsif lose? %>
+				<p>Sorry you lose, no more tries. The code was : <%= @@code %></p>
+			<% end %>
+			<% if @@all_guesses.size > 0 %>
+				<h5>Last guesses :<br></h5>
+				<% (@@all_guesses.size - 1).downto(0) do |n| %>
+					<p><%= @@all_guesses[n][0] %>  |  <%= @@all_guesses[n][1] %></p>
+				<% end %>
+			<% end %>
+		<% end %>
+	</body>
+</html>
